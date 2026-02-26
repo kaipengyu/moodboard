@@ -163,6 +163,31 @@ ScrollTrigger.create({
   }
 });
 
+/* ─── Imagery collage stagger ───────────────────────────────────── */
+ScrollTrigger.create({
+  trigger: '.img-collage',
+  start: 'top 82%',
+  once: true,
+  onEnter: () => {
+    gsap.fromTo('.img-coll-item',
+      { opacity: 0, scale: 0.97 },
+      { opacity: 1, scale: 1, duration: 0.75, stagger: 0.07, ease: 'power3.out' }
+    );
+  }
+});
+
+ScrollTrigger.create({
+  trigger: '.img-style-notes',
+  start: 'top 88%',
+  once: true,
+  onEnter: () => {
+    gsap.fromTo('.img-note',
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.65, stagger: 0.09, ease: 'power3.out' }
+    );
+  }
+});
+
 /* ─── Navigation demos slide in ─────────────────────────────────── */
 gsap.utils.toArray('.snav-hero-bar, .snav-white-bar, .mega-panel, .overlay-nav').forEach((el, i) => {
   gsap.fromTo(el,
@@ -177,17 +202,20 @@ gsap.utils.toArray('.snav-hero-bar, .snav-white-bar, .mega-panel, .overlay-nav')
 });
 
 /* ─── Heroes parallax ───────────────────────────────────────────── */
-gsap.utils.toArray('.hero-a-bg, .hero-b-left').forEach(bg => {
-  gsap.to(bg, {
-    yPercent: 18,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: bg.closest('.hero-a, .hero-b'),
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1.5,
+gsap.utils.toArray('.hero-a-bg, .hero-b-bg').forEach(bg => {
+  gsap.fromTo(bg,
+    { yPercent: -12 },
+    {
+      yPercent: 12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: bg.closest('.hero-a, .hero-b'),
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.8,
+      }
     }
-  });
+  );
 });
 
 /* Hero content fade in */
