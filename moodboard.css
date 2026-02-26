@@ -1691,3 +1691,232 @@ textarea.f-input { resize: vertical; }
   width: 0%;
   transition: width .1s linear;
 }
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+
+/* Mobile top bar (hidden on desktop) */
+.mobile-bar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--navy);
+  z-index: 500;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+.mobile-logo {
+  height: 28px;
+  width: auto;
+}
+.menu-toggle {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+}
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.sidebar-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.sidebar-open .menu-toggle span:nth-child(2) { opacity: 0; }
+.sidebar-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Sidebar overlay (for mobile drawer) */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 398;
+}
+
+/* ── Tablet (≤1024px) ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* Mobile bar + sidebar drawer */
+  .mobile-bar { display: flex; }
+  .sidebar-overlay { display: block; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  .sidebar-open .sidebar-overlay { opacity: 1; pointer-events: auto; }
+  .sidebar { transform: translateX(-100%); transition: transform .3s ease; z-index: 399; }
+  .sidebar-open .sidebar { transform: translateX(0); }
+  .main { margin-left: 0; padding-top: 56px; }
+  .progress-bar { left: 0; width: 100%; }
+
+  /* Sections */
+  .section { padding: 72px 44px; }
+  #overview { padding: 100px 44px; }
+  #imagery  { padding: 80px 44px; }
+
+  /* ── Hero A */
+  .hero-a { height: 480px; }
+
+  /* ── Hero B: stack image on top, stats below */
+  .hero-b { grid-template-columns: 1fr; height: auto; }
+  .hero-b-left  { min-height: 380px; padding: 48px 44px; }
+  .hero-b-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0;
+    padding: 36px 44px;
+    min-height: auto;
+  }
+  .hero-b-right > div { text-align: center; padding: 16px 24px; }
+  .hstat-num { font-size: 2.4rem; }
+
+  /* ── Typography */
+  .type-faces { grid-template-columns: 1fr; gap: 2px; }
+  .tf-panel:first-child { border-radius: 6px 6px 0 0; }
+  .tf-panel:last-child  { border-radius: 0 0 6px 6px; }
+  .type-scale-grid { grid-template-columns: 1fr; }
+  .type-quote { padding: 48px 44px; }
+
+  /* ── Colors */
+  .neutrals-row { grid-template-columns: repeat(6, 1fr); }
+
+  /* ── Navigation patterns: reduce side padding */
+  .snav-white-bar,
+  .snav-hero-bar { padding: 0 24px; }
+  .overlay-nav { padding: 28px 32px 48px; }
+
+  /* Pattern B — mega menu: stack cols below story images */
+  .mega-panel { grid-template-columns: 1fr; }
+  .mega-stories { grid-template-columns: 1fr 1fr; }
+  .mega-col {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 32px;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding: 20px 22px;
+  }
+  .mega-col-head { width: 100%; margin-bottom: 8px; }
+  .mega-col a { width: calc(50% - 16px); }
+
+  /* Pattern C — overlay nav: 2-col body, hide feature panel */
+  .overlay-body { grid-template-columns: 1fr 1fr; }
+  .overlay-feature { display: none; }
+  .overlay-secondary { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; margin-top: 8px; }
+
+  /* ── Cards */
+  .c3-grid { grid-template-columns: repeat(2, 1fr); }
+  .feat-card { grid-template-columns: 1fr; }
+  .feat-card .fc-img { height: 300px; }
+
+  /* ── Stat band 2×2 */
+  .stat-band { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Callouts: Environmental Stewardship */
+  .co-split { grid-template-columns: 1fr; }
+  .co-split-img { min-height: 300px; height: 300px; }
+  .co-split-text { padding: 48px 44px; }
+
+  /* ── Stories */
+  .co-strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .co-strip-grid .story-card:last-child { grid-column: 1 / -1; }
+
+  /* ── Imagery collage */
+  .img-collage { margin: 0 -44px; }
+  .img-coll-row1 { height: 300px; }
+  .img-coll-row2 { height: 200px; }
+  .img-style-notes { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── UI & Forms */
+  .f-row-2 { grid-template-columns: 1fr; }
+  .btn-row { flex-wrap: wrap; }
+}
+
+/* ── Mobile (≤768px) ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Sections */
+  .section { padding: 56px 20px; }
+  #overview { padding: 72px 20px; }
+  #imagery  { padding: 64px 20px; }
+
+  /* ── Overview */
+  .ov-intro { font-size: clamp(1.4rem, 4.5vw, 2rem); }
+
+  /* ── Hero A */
+  .hero-a { height: auto; min-height: 400px; }
+  .hero-a-content { padding: 72px 20px 48px; }
+  .hero-a-title { font-size: clamp(2rem, 8vw, 3.2rem); }
+  .hero-a-sub   { font-size: 0.95rem; }
+
+  /* ── Hero B */
+  .hero-b-left  { min-height: 300px; padding: 40px 20px; }
+  .hero-b-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .hero-b-right { padding: 28px 20px; gap: 0; }
+  .hero-b-right > div { padding: 12px 16px; }
+  .hstat-num { font-size: 2rem; }
+
+  /* ── Colors */
+  .neutrals-row { grid-template-columns: repeat(4, 1fr); }
+
+  /* ── Typography */
+  .type-faces { grid-template-columns: 1fr; }
+  .tf-serif-xl { font-size: 40px; }
+  .tf-serif-italic { font-size: 28px; }
+  .type-scale-grid { grid-template-columns: 1fr; }
+  .ts-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .ts-spec { width: auto; }
+  .type-quote { padding: 36px 20px; }
+  .tq-bg { font-size: 180px; }
+
+  /* ── Navigation patterns */
+  .snav-white-bar,
+  .snav-hero-bar { padding: 0 16px; height: 56px; }
+  .snav-links { display: none; }
+  .snav-actions { gap: 8px; }
+  .overlay-nav { padding: 20px 20px 40px; }
+
+  /* Pattern B — mega menu: single column, stories stack */
+  .mega-stories { grid-template-columns: 1fr; }
+  .mega-story-img { height: 120px; }
+  .mega-col a { width: 100%; }
+
+  /* Pattern C — overlay nav: single column */
+  .overlay-body { grid-template-columns: 1fr; }
+  .overlay-primary a { font-size: clamp(22px, 6vw, 36px); }
+  .overlay-secondary { display: none; }
+
+  /* ── Cards: single column */
+  .c3-grid { grid-template-columns: 1fr; }
+  .feat-card .fc-img { height: 240px; }
+  .fc-body { padding: 36px 24px; }
+
+  /* ── Stat band */
+  .sc-num { font-size: 2.4rem; }
+  .sc { padding: 32px 20px; }
+
+  /* ── Callouts: Environmental Stewardship */
+  .co-split-text { padding: 40px 20px; }
+  .co-split-title { font-size: clamp(26px, 6vw, 36px); }
+
+  /* ── Stories */
+  .co-strip-grid { grid-template-columns: 1fr; }
+  .co-strip-grid .story-card:last-child { grid-column: auto; }
+  .co-strip-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  /* ── Imagery collage */
+  .img-collage { margin: 0 -20px; }
+  .img-coll-row1 { grid-template-columns: 1fr; height: auto; }
+  .img-coll-row1 .img-coll-item:first-child { height: 240px; }
+  .img-coll-row1 .img-coll-item:last-child  { height: 160px; }
+  .img-coll-row2 { grid-template-columns: 1fr 1fr; height: 160px; }
+  .img-style-notes { grid-template-columns: 1fr; }
+
+  /* ── UI & Forms */
+  .f-row-2 { grid-template-columns: 1fr; }
+  .btn-row { flex-wrap: wrap; }
+}

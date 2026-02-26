@@ -387,3 +387,26 @@ document.querySelectorAll('.overlay-primary a').forEach(a => {
   a.addEventListener('mouseenter', () => gsap.to(a, { x: 10, duration: 0.25, ease: 'power2.out' }));
   a.addEventListener('mouseleave', () => gsap.to(a, { x: 0, duration: 0.25, ease: 'power2.out' }));
 });
+
+/* ─── Mobile sidebar toggle ─────────────────────────────────────── */
+const menuToggle = document.getElementById('menuToggle');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+function openSidebar() {
+  document.body.classList.add('sidebar-open');
+  lenis.stop();
+}
+function closeSidebar() {
+  document.body.classList.remove('sidebar-open');
+  lenis.start();
+}
+
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    document.body.classList.contains('sidebar-open') ? closeSidebar() : openSidebar();
+  });
+  sidebarOverlay.addEventListener('click', closeSidebar);
+  document.querySelectorAll('.sb-link').forEach(link => {
+    link.addEventListener('click', closeSidebar);
+  });
+}
