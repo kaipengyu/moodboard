@@ -5,12 +5,12 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
-  --navy:      #0B2A45;
-  --forest:    #1C3D2A;
+  --navy:      #1A5C8A;   /* Deep Navy — primary brand color */
+  --forest:    #7855A5;   /* Royal Purple — tertiary brand color */
   --ink:       #0E0E0D;
-  --water:     #006F8A;
-  --earth:     #C4A882;
-  --sage:      #6B8F71;
+  --water:     #5BB8DC;   /* Vibrant Blue — secondary brand color */
+  --earth:     #7FCBE8;   /* Soft Blue — italic accent */
+  --sage:      #C4AEE2;   /* Soft Purple — eyebrow on purple bkg */
   --cream:     #F4EFE6;
   --warm:      #FAF8F5;
   --text-1:    #1A1918;
@@ -119,7 +119,7 @@ button { font-family: var(--sans); }
 .sb-link.is-active {
   color: var(--white);
   border-left-color: var(--water);
-  background: rgba(0,111,138,.09);
+  background: rgba(91,184,220,.09);
 }
 
 .sb-num {
@@ -209,8 +209,8 @@ button { font-family: var(--sans); }
   background:
     linear-gradient(110deg, rgba(6,20,38,.97) 0%, rgba(8,26,46,.92) 32%, rgba(11,42,69,.62) 58%, rgba(11,42,69,.28) 100%),
     linear-gradient(to top, rgba(4,12,24,.90) 0%, transparent 30%),
-    radial-gradient(ellipse 50% 60% at 90% 40%, rgba(0,111,138,.18) 0%, transparent 58%),
-    radial-gradient(ellipse 30% 36% at 8% 92%, rgba(28,61,42,.30) 0%, transparent 55%);
+    radial-gradient(ellipse 50% 60% at 90% 40%, rgba(91,184,220,.18) 0%, transparent 58%),
+    radial-gradient(ellipse 30% 36% at 8% 92%, rgba(120,85,165,.20) 0%, transparent 55%);
 }
 
 .ov-inner { position: relative; z-index: 1; max-width: 880px; }
@@ -291,12 +291,13 @@ button { font-family: var(--sans); }
   font-weight: 300;
   max-width: 480px;
   line-height: 1.68;
+  text-wrap: pretty;
 }
 
 /* Brand swatches */
 .palette-brand {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   border-radius: 6px;
   overflow: visible;
   margin-bottom: 14px;
@@ -731,7 +732,7 @@ button { font-family: var(--sans); }
 
 .snav-cta {
   background: var(--water);
-  color: var(--white);
+  color: var(--navy);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: .04em;
@@ -740,7 +741,7 @@ button { font-family: var(--sans); }
   text-decoration: none;
   transition: background .2s;
 }
-.snav-cta:hover { background: #005f78; }
+.snav-cta:hover { background: #4A9CBC; }
 
 /* Simulated nav — white/scrolled */
 .snav-white-bar {
@@ -1248,7 +1249,7 @@ button { font-family: var(--sans); }
   padding: 44px 36px;
   text-align: center;
 }
-.sc:nth-child(even) { background: #0d3a5e; }
+.sc:nth-child(even) { background: #134D78; }
 .sc-num {
   font-family: var(--serif);
   font-size: 56px;
@@ -1471,7 +1472,7 @@ button { font-family: var(--sans); }
 .co-forest-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(107,143,113,.14) 0%, transparent 65%);
+  background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(196,174,226,.14) 0%, transparent 65%);
   pointer-events: none;
 }
 .co-forest-tag {
@@ -1589,9 +1590,9 @@ button { font-family: var(--sans); }
 .btn:active { transform: translateY(0); }
 
 .btn-primary { background: var(--navy); color: var(--white); border-color: var(--navy); }
-.btn-primary:hover { background: #0d3a5e; border-color: #0d3a5e; }
-.btn-water   { background: var(--water); color: var(--white); border-color: var(--water); }
-.btn-water:hover { background: #005f78; border-color: #005f78; }
+.btn-primary:hover { background: #134D78; border-color: #134D78; }
+.btn-water   { background: var(--water); color: var(--navy); border-color: var(--water); }
+.btn-water:hover { background: #4A9CBC; border-color: #4A9CBC; }
 .btn-outline-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn-outline-dark:hover { background: var(--ink); color: var(--white); }
 .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,.4); }
@@ -1640,7 +1641,7 @@ button { font-family: var(--sans); }
 }
 .f-input:focus {
   border-color: var(--water);
-  box-shadow: 0 0 0 3px rgba(0,111,138,.1);
+  box-shadow: 0 0 0 3px rgba(91,184,220,.15);
   background: var(--white);
 }
 .f-input::placeholder { color: var(--text-3); font-weight: 300; }
@@ -1660,7 +1661,7 @@ button { font-family: var(--sans); }
   appearance: none;
   transition: border-color .2s;
 }
-.f-select:focus { border-color: var(--water); box-shadow: 0 0 0 3px rgba(0,111,138,.1); }
+.f-select:focus { border-color: var(--water); box-shadow: 0 0 0 3px rgba(91,184,220,.15); }
 
 textarea.f-input { resize: vertical; }
 
@@ -1687,7 +1688,7 @@ textarea.f-input { resize: vertical; }
 .alert-time-est { font-weight: 600; }
 .alert-link { font-size: 12px; font-weight: 500; text-decoration: none; display: inline-block; margin-top: 6px; padding-left: 0; }
 
-.alert-info    { background:rgba(0,111,138,.06);  border-left-color:var(--water);   }
+.alert-info    { background:rgba(91,184,220,.06);  border-left-color:var(--water);   }
 .alert-success { background:rgba(46,139,92,.07);  border-left-color:#2E8B5C;        }
 .alert-warn    { background:rgba(180,120,0,.07);  border-left-color:#b47800;        }
 .alert-danger  { background:rgba(180,50,20,.07);  border-left-color:#b43214;        }
@@ -1943,6 +1944,20 @@ textarea.f-input { resize: vertical; }
   .img-coll-row1 .img-coll-item:last-child  { height: 160px; }
   .img-coll-row2 { grid-template-columns: 1fr 1fr; height: 160px; }
   .img-style-notes { grid-template-columns: 1fr; }
+
+  /* ── Color palette: 2×2 grid, full width, equal height rows */
+  .palette-brand {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+  }
+  .sw:first-child  { border-radius: 6px 0 0 0; }
+  .sw:nth-child(2) { border-radius: 0 6px 0 0; }
+  .sw:nth-child(3) { border-radius: 0 0 0 6px; }
+  .sw:last-child   { border-radius: 0 0 6px 0; }
+  .sw { display: flex; flex-direction: column; }
+  .sw-bar { flex: 1; height: auto; min-height: 110px; }
+  .sw-info { border-right: none; border-top: 1px solid rgba(0,0,0,.05); }
+  .sw:nth-child(odd) .sw-info { border-right: 1px solid rgba(0,0,0,.05); }
 
   /* ── UI & Forms */
   .ui-grid { grid-template-columns: 1fr; }
