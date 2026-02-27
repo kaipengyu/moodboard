@@ -61,29 +61,44 @@ sbLinks.forEach(link => {
 /* ─── GSAP: Register ScrollTrigger ────────────────────────────── */
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Overview hero: line-mask text reveal ─────────────────────── */
+/* ─── Overview hero: onboarding sequence + parallax ────────────── */
 const ovLines = gsap.utils.toArray('#overview .line-mask span');
-if (ovLines.length) {
-  gsap.fromTo(ovLines,
-    { y: '105%', opacity: 0 },
-    {
-      y: '0%',
-      opacity: 1,
-      duration: 1.1,
-      stagger: 0.12,
-      ease: 'power4.out',
-      delay: 0.2,
+
+// Set initial states before first paint
+gsap.set('#overview .ov-bg',     { opacity: 0, scale: 1.07 });
+gsap.set('#overview .ov-eyebrow',{ opacity: 0, x: -28 });
+if (ovLines.length) gsap.set(ovLines, { y: '105%' });
+gsap.set('#overview .ov-body',   { opacity: 0, y: 24 });
+gsap.set('#overview .ov-meta',   { opacity: 0, y: 18 });
+
+// Entrance timeline
+const ovTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+ovTl
+  // 1. Image fades + scales in
+  .to('#overview .ov-bg',     { opacity: 1, scale: 1, duration: 2.0, ease: 'power2.out' }, 0)
+  // 2. Eyebrow slides in from the left
+  .to('#overview .ov-eyebrow',{ opacity: 1, x: 0, duration: 0.65 }, 0.55)
+  // 3. Title lines unmask
+  .to(ovLines,                { y: '0%', duration: 1.1, stagger: 0.12, ease: 'power4.out' }, 0.85)
+  // 4. Body copy
+  .to('#overview .ov-body',   { opacity: 1, y: 0, duration: 1.0 }, 1.35)
+  // 5. Meta strip
+  .to('#overview .ov-meta',   { opacity: 1, y: 0, duration: 0.9 }, 1.60);
+
+// Scroll parallax — image drifts at a slower rate than the page
+gsap.fromTo('#overview .ov-bg',
+  { yPercent: -8 },
+  {
+    yPercent: 8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#overview',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.8,
     }
-  );
-  gsap.fromTo('#overview .ov-body',
-    { opacity: 0, y: 22 },
-    { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.7 }
-  );
-  gsap.fromTo('#overview .ov-meta',
-    { opacity: 0, y: 18 },
-    { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.95 }
-  );
-}
+  }
+);
 
 /* ─── Generic section fade-up ──────────────────────────────────── */
 function fadeUp(selector, options = {}) {
@@ -363,11 +378,17 @@ document.querySelectorAll('.btn').forEach(btn => {
   });
 });
 
-/* ─── Swatch hover expand ───────────────────────────────────────── */
+/* ─── Swatch hover: card lift + bar grow (contained within each .sw) ── */
 document.querySelectorAll('.sw').forEach(sw => {
   const bar = sw.querySelector('.sw-bar');
-  sw.addEventListener('mouseenter', () => gsap.to(bar, { height: 132, duration: 0.3, ease: 'power2.out' }));
-  sw.addEventListener('mouseleave', () => gsap.to(bar, { height: 110, duration: 0.3, ease: 'power2.out' }));
+  sw.addEventListener('mouseenter', () => {
+    gsap.to(bar, { height: 130, duration: 0.28, ease: 'power2.out' });
+    gsap.to(sw, { y: -7, boxShadow: '0 14px 32px rgba(0,0,0,.18)', duration: 0.28, ease: 'power2.out' });
+  });
+  sw.addEventListener('mouseleave', () => {
+    gsap.to(bar, { height: 110, duration: 0.28, ease: 'power2.out' });
+    gsap.to(sw, { y: 0, boxShadow: '0 0px 0px rgba(0,0,0,0)', duration: 0.28, ease: 'power2.out' });
+  });
 });
 
 /* ─── Mega menu link arrow hover ────────────────────────────────── */
